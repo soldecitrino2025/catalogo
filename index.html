@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Sol de Citrino - Catálogo de Productos de Lujo</title>
+    <meta name="description" content="Descubre la colección exclusiva de Sol de Citrino. Productos elegantes y de alta calidad diseñados para realzar tu estilo. Joyería, accesorios y más.">
+    <meta name="keywords" content="Sol de Citrino, catálogo de productos, joyería de lujo, accesorios elegantes, diseño exclusivo, regalos de lujo">
+    <meta name="author" content="Sol de Citrino">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/DAA520/000000?text=SC" type="image/png">
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #121212; color: #F5F5F5; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .gold-gradient-text { background: linear-gradient(90deg, #FFD700, #DAA520); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
+        .gold-gradient-bg { background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); }
+        .gold-gradient-button { background: linear-gradient(90deg, #DAA520, #FFD700); }
+        .modal-backdrop { background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        /* Clases para mostrar/ocultar elementos de admin */
+        .admin-only { display: none; }
+        body.admin-view .admin-only { display: block; } /* O flex, grid, etc. según el elemento */
+        body.admin-view .admin-only-flex { display: flex; }
+        body.admin-view .admin-only-inline-block { display: inline-block; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ===== Encabezado Fijo ===== -->
+    <header id="header" class="bg-black/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-lg shadow-black/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gold-gradient-text tracking-wider">Sol de Citrino</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#productos" class="text-gray-300 hover:text-white transition duration-300">Productos</a>
+                <a href="#nosotros" class="text-gray-300 hover:text-white transition duration-300">Nosotros</a>
+                <a href="#contacto" class="text-gray-300 hover:text-white transition duration-300">Contacto</a>
+                <button id="logout-button" class="admin-only bg-red-600 text-white text-xs py-1 px-3 rounded-full hover:bg-red-700 transition">Salir</button>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90">
+            <a href="#productos" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Productos</a>
+            <a href="#nosotros" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Nosotros</a>
+            <a href="#contacto" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== Sección Hero ===== -->
+        <section id="hero" class="min-h-screen flex items-center justify-center gold-gradient-bg pt-20">
+            <div class="text-center container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">Elegancia que <span class="gold-gradient-text">Define</span> tu Estilo</h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">Explora nuestra selección curada de piezas únicas que combinan diseño atemporal y artesanía excepcional.</p>
+                <a href="#productos" class="inline-block gold-gradient-button text-black font-bold py-3 px-8 rounded-full text-lg hover:shadow-xl hover:shadow-yellow-500/20 transform hover:scale-105 transition-all duration-300">Ver Catálogo</a>
+            </div>
+        </section>
+
+        <!-- ===== Sección Catálogo de Productos ===== -->
+        <section id="productos" class="py-20 md:py-28 bg-[#181818]">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Nuestra Colección</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-amber-400 mx-auto mt-4 rounded"></div>
+                </div>
+                
+                <!-- Botón para agregar nuevo producto (solo para admin) -->
+                <div class="text-center mb-12 admin-only">
+                    <button id="add-product-button" class="gold-gradient-button text-black font-bold py-2 px-6 rounded-full hover:shadow-lg hover:shadow-yellow-500/20 transform hover:scale-105 transition">
+                        + Agregar Nuevo Producto
+                    </button>
+                </div>
+
+                <!-- Contenedor de la cuadrícula de productos (se llenará con JS) -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    <!-- Los productos se cargarán aquí desde Firebase -->
+                    <p id="loading-products" class="text-center col-span-full">Cargando productos...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- El resto de las secciones permanecen igual -->
+        <section id="nosotros" class="py-20 md:py-28 gold-gradient-bg">
+            <!-- Contenido de "Sobre Nosotros" -->
+        </section>
+    </main>
+
+    <!-- ===== Pie de Página ===== -->
+    <footer id="contacto" class="bg-black py-12">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <!-- Contenido del footer -->
+            <p class="text-sm mt-4">
+                <a href="#" id="admin-login-link" class="hover:text-white transition">Admin Login</a>
+            </p>
+            <div class="border-t border-gray-800 pt-6 mt-6">
+                <p class="text-sm">&copy; <span id="year"></span> Sol de Citrino. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- ===== MODALES ===== -->
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="fixed inset-0 z-50 items-center justify-center hidden modal-backdrop">
+        <div class="bg-[#181818] rounded-lg shadow-2xl p-8 w-full max-w-sm border border-yellow-500/20">
+            <h2 class="text-2xl text-center font-bold mb-2 gold-gradient-text">Acceso Admin</h2>
+            <p class="text-center text-gray-400 mb-6">Ingresa tus credenciales</p>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" id="email" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-yellow-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-300 mb-2">Contraseña</label>
+                    <input type="password" id="password" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-yellow-500" required>
+                </div>
+                <button type="submit" class="w-full gold-gradient-button text-black font-bold py-2 px-4 rounded-full hover:shadow-lg transition">Ingresar</button>
+                <p id="login-error" class="text-red-500 text-sm mt-4 text-center"></p>
+            </form>
+            <button id="close-login-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white">&times;</button>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar/Editar Producto -->
+    <div id="product-modal" class="fixed inset-0 z-50 items-center justify-center hidden modal-backdrop">
+        <div class="bg-[#181818] rounded-lg shadow-2xl p-8 w-full max-w-md border border-yellow-500/20 max-h-[90vh] overflow-y-auto">
+            <h2 id="product-modal-title" class="text-2xl text-center font-bold mb-6 gold-gradient-text">Agregar Producto</h2>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <div class="mb-4">
+                    <label for="product-name" class="block text-gray-300 mb-2">Nombre</label>
+                    <input type="text" id="product-name" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="product-description" class="block text-gray-300 mb-2">Descripción</label>
+                    <textarea id="product-description" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="product-price" class="block text-gray-300 mb-2">Precio</label>
+                    <input type="number" step="0.01" id="product-price" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white" required>
+                </div>
+                <div class="mb-4">
+                    <label for="product-image" class="block text-gray-300 mb-2">Imagen</label>
+                    <input type="file" id="product-image" class="w-full text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-600 file:text-black hover:file:bg-yellow-500">
+                    <img id="image-preview" src="" class="mt-4 rounded-lg max-h-40 hidden" alt="Vista previa de la imagen">
+                </div>
+                <div class="flex justify-end gap-4 mt-8">
+                    <button type="button" id="cancel-product-modal" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">Cancelar</button>
+                    <button type="submit" class="gold-gradient-button text-black font-bold py-2 px-6 rounded-full hover:shadow-lg transition">Guardar</button>
+                </div>
+                 <p id="upload-progress" class="text-center text-yellow-400 mt-4"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        // Importar funciones de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+        // =================================================================================
+        // TU CONFIGURACIÓN DE FIREBASE VA AQUÍ
+        // Reemplaza este objeto con la configuración de tu propio proyecto de Firebase
+        // =================================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSy...xxxxxxxxxxxxxxxxxxx",
+            authDomain: "tu-proyecto.firebaseapp.com",
+            projectId: "tu-proyecto",
+            storageBucket: "tu-proyecto.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:xxxxxxxxxxxx"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // =================================================================================
+        // LÓGICA DE LA APLICACIÓN
+        // =================================================================================
+
+        const productGrid = document.getElementById('product-grid');
+        const loadingMessage = document.getElementById('loading-products');
+
+        // --- LÓGICA DE AUTENTICACIÓN ---
+
+        const loginModal = document.getElementById('login-modal');
+        const adminLoginLink = document.getElementById('admin-login-link');
+        const closeLoginModalBtn = document.getElementById('close-login-modal');
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const logoutButton = document.getElementById('logout-button');
+
+        adminLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+        });
+
+        closeLoginModalBtn.addEventListener('click', () => loginModal.style.display = 'none');
+        
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = loginForm.email.value;
+            const password = loginForm.password.value;
+            loginError.textContent = '';
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                loginModal.style.display = 'none';
+                loginForm.reset();
+            } catch (error) {
+                console.error("Error de inicio de sesión:", error);
+                loginError.textContent = 'Email o contraseña incorrectos.';
+            }
+        });
+
+        logoutButton.addEventListener('click', async () => {
+            await signOut(auth);
+        });
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // El usuario es admin y está logueado
+                document.body.classList.add('admin-view');
+            } else {
+                // El usuario no está logueado
+                document.body.classList.remove('admin-view');
+            }
+        });
+
+        // --- LÓGICA DE PRODUCTOS (CRUD) ---
+
+        const productModal = document.getElementById('product-modal');
+        const addProductButton = document.getElementById('add-product-button');
+        const cancelProductModalBtn = document.getElementById('cancel-product-modal');
+        const productForm = document.getElementById('product-form');
+        const imagePreview = document.getElementById('image-preview');
+        const productImageInput = document.getElementById('product-image');
+        const uploadProgress = document.getElementById('upload-progress');
+
+        // Abrir modal para agregar producto
+        addProductButton.addEventListener('click', () => {
+            productForm.reset();
+            document.getElementById('product-id').value = '';
+            document.getElementById('product-modal-title').textContent = 'Agregar Nuevo Producto';
+            imagePreview.classList.add('hidden');
+            productModal.style.display = 'flex';
+        });
+
+        // Cerrar modal de producto
+        cancelProductModalBtn.addEventListener('click', () => productModal.style.display = 'none');
+
+        // Vista previa de la imagen
+        productImageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    imagePreview.src = event.target.result;
+                    imagePreview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Guardar (Crear o Actualizar) producto
+        productForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('product-id').value;
+            const name = document.getElementById('product-name').value;
+            const description = document.getElementById('product-description').value;
+            const price = parseFloat(document.getElementById('product-price').value);
+            const imageFile = document.getElementById('product-image').files[0];
+
+            try {
+                if (id) { // Actualizar producto existente
+                    const productRef = doc(db, 'products', id);
+                    await updateDoc(productRef, { name, description, price });
+                    // Lógica para actualizar imagen si se sube una nueva
+                    if (imageFile) {
+                        await uploadImageAndUpdateProduct(imageFile, productRef);
+                    } else {
+                        productModal.style.display = 'none';
+                    }
+                } else { // Crear nuevo producto
+                    if (!imageFile) {
+                        alert('Por favor, selecciona una imagen para el nuevo producto.');
+                        return;
+                    }
+                    const newProductRef = await addDoc(collection(db, 'products'), { name, description, price, imageUrl: '', imageName: '' });
+                    await uploadImageAndUpdateProduct(imageFile, newProductRef);
+                }
+            } catch (error) {
+                console.error("Error al guardar el producto:", error);
+                alert('Hubo un error al guardar el producto.');
+                uploadProgress.textContent = '';
+            }
+        });
+
+        async function uploadImageAndUpdateProduct(file, productRef) {
+            const imageName = `${Date.now()}-${file.name}`;
+            const storageRef = ref(storage, `products/${imageName}`);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    uploadProgress.textContent = `Subiendo imagen: ${Math.round(progress)}%`;
+                },
+                (error) => {
+                    console.error("Error al subir imagen:", error);
+                    alert('Error al subir la imagen.');
+                    uploadProgress.textContent = '';
+                },
+                async () => {
+                    const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                    await updateDoc(productRef, { imageUrl: downloadURL, imageName: imageName });
+                    productModal.style.display = 'none';
+                    uploadProgress.textContent = '';
+                }
+            );
+        }
+
+        // --- MOSTRAR PRODUCTOS ---
+        
+        onSnapshot(collection(db, 'products'), (snapshot) => {
+            productGrid.innerHTML = '';
+            if (snapshot.empty) {
+                loadingMessage.textContent = 'No hay productos en el catálogo todavía. ¡Agrega el primero!';
+                productGrid.appendChild(loadingMessage);
+            } else {
+                snapshot.docs.forEach(doc => {
+                    const product = { id: doc.id, ...doc.data() };
+                    renderProductCard(product);
+                });
+            }
+        });
+
+        function renderProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'bg-black/50 rounded-lg overflow-hidden shadow-lg group transform hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-yellow-500/50';
+            
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${product.imageUrl || 'https://placehold.co/600x400/1a1a1a/DAA520?text=Sin+Imagen'}" alt="Imagen de ${product.name}" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 gold-gradient-text">${product.name}</h3>
+                    <p class="text-gray-400 text-sm mb-4 h-16 overflow-hidden">${product.description}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-2xl font-semibold text-white">$${product.price.toFixed(2)}</span>
+                        <a href="mailto:ventas@soldecitrino.com?subject=Consulta sobre ${product.name}" class="gold-gradient-button text-black text-sm font-semibold py-2 px-5 rounded-full hover:shadow-md transform hover:scale-105 transition">
+                            Consultar
+                        </a>
+                    </div>
+                </div>
+                <!-- Botones de Admin -->
+                <div class="admin-only-flex p-3 bg-gray-900/50 justify-end gap-2">
+                    <button class="edit-btn text-blue-400 hover:text-blue-300 text-sm">Editar</button>
+                    <button class="delete-btn text-red-500 hover:text-red-400 text-sm">Eliminar</button>
+                </div>
+            `;
+            productGrid.appendChild(card);
+
+            // Event Listeners para botones de admin
+            card.querySelector('.edit-btn')?.addEventListener('click', () => {
+                document.getElementById('product-id').value = product.id;
+                document.getElementById('product-name').value = product.name;
+                document.getElementById('product-description').value = product.description;
+                document.getElementById('product-price').value = product.price;
+                document.getElementById('product-modal-title').textContent = 'Editar Producto';
+                imagePreview.src = product.imageUrl;
+                imagePreview.classList.remove('hidden');
+                productModal.style.display = 'flex';
+            });
+
+            card.querySelector('.delete-btn')?.addEventListener('click', async () => {
+                if (confirm(`¿Estás seguro de que quieres eliminar "${product.name}"?`)) {
+                    try {
+                        // Eliminar documento de Firestore
+                        await deleteDoc(doc(db, 'products', product.id));
+                        // Eliminar imagen de Storage
+                        if (product.imageName) {
+                            const imageRef = ref(storage, `products/${product.imageName}`);
+                            await deleteObject(imageRef);
+                        }
+                    } catch (error) {
+                        console.error("Error al eliminar:", error);
+                        alert('No se pudo eliminar el producto.');
+                    }
+                }
+            });
+        }
+        
+        // Script para el año actual en el footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
