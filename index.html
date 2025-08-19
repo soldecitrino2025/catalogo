@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Meta Tags -->
-    <title>Sol de Citrino - Catálogo de Productos de Lujo</title>
-    <meta name="description" content="Descubre la colección exclusiva de Sol de Citrino. Productos elegantes y de alta calidad diseñados para realzar tu estilo. Joyería, accesorios y más.">
-    <meta name="keywords" content="Sol de Citrino, catálogo de productos, joyería de lujo, accesorios elegantes, diseño exclusivo, regalos de lujo">
+    <title>Sol de Citrino - CatÃ¡logo de Productos de Lujo</title>
+    <meta name="description" content="Descubre la colecciÃ³n exclusiva de Sol de Citrino. Productos elegantes y de alta calidad diseÃ±ados para realzar tu estilo. JoyerÃ­a, accesorios y mÃ¡s.">
+    <meta name="keywords" content="Sol de Citrino, catÃ¡logo de productos, joyerÃ­a de lujo, accesorios elegantes, diseÃ±o exclusivo, regalos de lujo">
     <meta name="author" content="Sol de Citrino">
 
     <!-- Google Fonts -->
@@ -30,7 +30,7 @@
         .modal-backdrop { background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
         /* Clases para mostrar/ocultar elementos de admin */
         .admin-only { display: none; }
-        body.admin-view .admin-only { display: block; } /* O flex, grid, etc. según el elemento */
+        body.admin-view .admin-only { display: block; } /* O flex, grid, etc. segÃºn el elemento */
         body.admin-view .admin-only-flex { display: flex; }
         body.admin-view .admin-only-inline-block { display: inline-block; }
     </style>
@@ -59,33 +59,33 @@
     </header>
 
     <main>
-        <!-- ===== Sección Hero ===== -->
+        <!-- ===== SecciÃ³n Hero ===== -->
         <section id="hero" class="min-h-screen flex items-center justify-center gold-gradient-bg pt-20">
             <div class="text-center container mx-auto px-6">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">Elegancia que <span class="gold-gradient-text">Define</span> tu Estilo</h1>
-                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">Explora nuestra selección curada de piezas únicas que combinan diseño atemporal y artesanía excepcional.</p>
-                <a href="#productos" class="inline-block gold-gradient-button text-black font-bold py-3 px-8 rounded-full text-lg hover:shadow-xl hover:shadow-yellow-500/20 transform hover:scale-105 transition-all duration-300">Ver Catálogo</a>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">Explora nuestra selecciÃ³n curada de piezas Ãºnicas que combinan diseÃ±o atemporal y artesanÃ­a excepcional.</p>
+                <a href="#productos" class="inline-block gold-gradient-button text-black font-bold py-3 px-8 rounded-full text-lg hover:shadow-xl hover:shadow-yellow-500/20 transform hover:scale-105 transition-all duration-300">Ver CatÃ¡logo</a>
             </div>
         </section>
 
-        <!-- ===== Sección Catálogo de Productos ===== -->
+        <!-- ===== SecciÃ³n CatÃ¡logo de Productos ===== -->
         <section id="productos" class="py-20 md:py-28 bg-[#181818]">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold">Nuestra Colección</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold">Nuestra ColecciÃ³n</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-amber-400 mx-auto mt-4 rounded"></div>
                 </div>
                 
-                <!-- Botón para agregar nuevo producto (solo para admin) -->
+                <!-- BotÃ³n para agregar nuevo producto (solo para admin) -->
                 <div class="text-center mb-12 admin-only">
                     <button id="add-product-button" class="gold-gradient-button text-black font-bold py-2 px-6 rounded-full hover:shadow-lg hover:shadow-yellow-500/20 transform hover:scale-105 transition">
                         + Agregar Nuevo Producto
                     </button>
                 </div>
 
-                <!-- Contenedor de la cuadrícula de productos (se llenará con JS) -->
+                <!-- Contenedor de la cuadrÃ­cula de productos (se llenarÃ¡ con JS) -->
                 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-                    <!-- Los productos se cargarán aquí desde Firebase -->
+                    <!-- Los productos se cargarÃ¡n aquÃ­ desde Firebase -->
                     <p id="loading-products" class="text-center col-span-full">Cargando productos...</p>
                 </div>
             </div>
@@ -97,7 +97,7 @@
         </section>
     </main>
 
-    <!-- ===== Pie de Página ===== -->
+    <!-- ===== Pie de PÃ¡gina ===== -->
     <footer id="contacto" class="bg-black py-12">
         <div class="container mx-auto px-6 text-center text-gray-400">
             <!-- Contenido del footer -->
@@ -123,7 +123,7 @@
                     <input type="email" id="email" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-yellow-500" required>
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-gray-300 mb-2">Contraseña</label>
+                    <label for="password" class="block text-gray-300 mb-2">ContraseÃ±a</label>
                     <input type="password" id="password" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white focus:outline-none focus:border-yellow-500" required>
                 </div>
                 <button type="submit" class="w-full gold-gradient-button text-black font-bold py-2 px-4 rounded-full hover:shadow-lg transition">Ingresar</button>
@@ -144,7 +144,7 @@
                     <input type="text" id="product-name" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white" required>
                 </div>
                 <div class="mb-4">
-                    <label for="product-description" class="block text-gray-300 mb-2">Descripción</label>
+                    <label for="product-description" class="block text-gray-300 mb-2">DescripciÃ³n</label>
                     <textarea id="product-description" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2 text-white"></textarea>
                 </div>
                 <div class="mb-4">
@@ -174,17 +174,17 @@
         import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         // =================================================================================
-        // TU CONFIGURACIÓN DE FIREBASE VA AQUÍ
-        // Reemplaza este objeto con la configuración de tu propio proyecto de Firebase
+        // TU CONFIGURACIÃ“N DE FIREBASE VA AQUÃ
+        // Reemplaza este objeto con la configuraciÃ³n de tu propio proyecto de Firebase
         // =================================================================================
-        const firebaseConfig = {
-            apiKey: "AIzaSy...xxxxxxxxxxxxxxxxxxx",
-            authDomain: "tu-proyecto.firebaseapp.com",
-            projectId: "tu-proyecto",
-            storageBucket: "tu-proyecto.appspot.com",
-            messagingSenderId: "1234567890",
-            appId: "1:1234567890:web:xxxxxxxxxxxx"
-        };
+const firebaseConfig = {
+  apiKey: "AIzaSyC_v_gWucbOVeYf_zgjjvjYBIF4yZFzzpc",
+  authDomain: "sol-de-citrino-web.firebaseapp.com",
+  projectId: "sol-de-citrino-web",
+  storageBucket: "sol-de-citrino-web.firebasestorage.app",
+  messagingSenderId: "569415845713",
+  appId: "1:569415845713:web:598a609681e79ca128b570"
+};
 
         // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
@@ -193,13 +193,13 @@
         const storage = getStorage(app);
 
         // =================================================================================
-        // LÓGICA DE LA APLICACIÓN
+        // LÃ“GICA DE LA APLICACIÃ“N
         // =================================================================================
 
         const productGrid = document.getElementById('product-grid');
         const loadingMessage = document.getElementById('loading-products');
 
-        // --- LÓGICA DE AUTENTICACIÓN ---
+        // --- LÃ“GICA DE AUTENTICACIÃ“N ---
 
         const loginModal = document.getElementById('login-modal');
         const adminLoginLink = document.getElementById('admin-login-link');
@@ -225,8 +225,8 @@
                 loginModal.style.display = 'none';
                 loginForm.reset();
             } catch (error) {
-                console.error("Error de inicio de sesión:", error);
-                loginError.textContent = 'Email o contraseña incorrectos.';
+                console.error("Error de inicio de sesiÃ³n:", error);
+                loginError.textContent = 'Email o contraseÃ±a incorrectos.';
             }
         });
 
@@ -236,15 +236,15 @@
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // El usuario es admin y está logueado
+                // El usuario es admin y estÃ¡ logueado
                 document.body.classList.add('admin-view');
             } else {
-                // El usuario no está logueado
+                // El usuario no estÃ¡ logueado
                 document.body.classList.remove('admin-view');
             }
         });
 
-        // --- LÓGICA DE PRODUCTOS (CRUD) ---
+        // --- LÃ“GICA DE PRODUCTOS (CRUD) ---
 
         const productModal = document.getElementById('product-modal');
         const addProductButton = document.getElementById('add-product-button');
@@ -292,7 +292,7 @@
                 if (id) { // Actualizar producto existente
                     const productRef = doc(db, 'products', id);
                     await updateDoc(productRef, { name, description, price });
-                    // Lógica para actualizar imagen si se sube una nueva
+                    // LÃ³gica para actualizar imagen si se sube una nueva
                     if (imageFile) {
                         await uploadImageAndUpdateProduct(imageFile, productRef);
                     } else {
@@ -342,7 +342,7 @@
         onSnapshot(collection(db, 'products'), (snapshot) => {
             productGrid.innerHTML = '';
             if (snapshot.empty) {
-                loadingMessage.textContent = 'No hay productos en el catálogo todavía. ¡Agrega el primero!';
+                loadingMessage.textContent = 'No hay productos en el catÃ¡logo todavÃ­a. Â¡Agrega el primero!';
                 productGrid.appendChild(loadingMessage);
             } else {
                 snapshot.docs.forEach(doc => {
@@ -392,7 +392,7 @@
             });
 
             card.querySelector('.delete-btn')?.addEventListener('click', async () => {
-                if (confirm(`¿Estás seguro de que quieres eliminar "${product.name}"?`)) {
+                if (confirm(`Â¿EstÃ¡s seguro de que quieres eliminar "${product.name}"?`)) {
                     try {
                         // Eliminar documento de Firestore
                         await deleteDoc(doc(db, 'products', product.id));
@@ -409,8 +409,9 @@
             });
         }
         
-        // Script para el año actual en el footer
+        // Script para el aÃ±o actual en el footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
+
