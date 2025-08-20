@@ -323,7 +323,10 @@
 
                     try {
                         if (imageFile) {
-                            const imageName = `${Date.now()}-${imageFile.name}`;
+                            // FIX: Sanitize file name
+                            const sanitizedFileName = imageFile.name.replace(/[^a-zA-Z0-9.\-_]/g, '-');
+                            const imageName = `${Date.now()}-${sanitizedFileName}`;
+                            
                             uploadProgress.textContent = 'Subiendo imagen...';
                             const { error: uploadError } = await supabaseClient.storage
                                 .from('product-images')
@@ -360,18 +363,16 @@
                         const { data: products, error } = await supabaseClient.from('products').select('*');
                         if (error) throw error;
 
+                        const productGrid = document.getElementById('product-grid');
+                        const offersGrid = document.getElementById('offers-grid');
                         productGrid.innerHTML = '';
                         offersGrid.innerHTML = '';
-                        let hasProducts = false, hasOffers = false;
-
+                        
                         products.forEach(product => {
-                            const container = product.isOffer ? offersGrid.innerHTML : productGrid.innerHTML;
+                            const container = product.isOffer ? offersGrid : productGrid;
                             renderProductCard(product, container);
-                            if (product.isOffer) hasOffers = true; else hasProducts = true;
                         });
 
-                        if (!hasProducts) productGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No hay productos en el catálogo.</p>`;
-                        if (!hasOffers) offersGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No hay ofertas destacadas.</p>`;
                     } catch (error) {
                         console.error("Error al cargar productos:", error);
                         const errorMessage = `<div class="col-span-full text-center p-8 bg-red-900/50 rounded-lg border border-red-500/50">
@@ -385,8 +386,8 @@
                                                     <code class="bg-gray-700 p-1 rounded text-yellow-300">https://soldecitrino2025.github.io</code>
                                                 </p>
                                             </div>`;
-                        productGrid.innerHTML = errorMessage;
-                        offersGrid.innerHTML = '';
+                        productGrid.parentElement.innerHTML = errorMessage;
+                        offersGrid.parentElement.innerHTML = '';
                     }
                 }
 
@@ -483,3 +484,4 @@
     </script>
 </body>
 </html>
+
