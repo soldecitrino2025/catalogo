@@ -365,7 +365,7 @@
                         let hasProducts = false, hasOffers = false;
 
                         products.forEach(product => {
-                            const container = product.isOffer ? offersGrid : productGrid;
+                            const container = product.isOffer ? offersGrid.innerHTML : productGrid.innerHTML;
                             renderProductCard(product, container);
                             if (product.isOffer) hasOffers = true; else hasProducts = true;
                         });
@@ -483,4 +483,3 @@
     </script>
 </body>
 </html>
-
