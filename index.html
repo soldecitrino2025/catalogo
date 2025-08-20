@@ -218,7 +218,6 @@
         // INICIALIZACIÓN Y LÓGICA
         // =================================================================================
         
-        // FIX: Check for placeholder values before initializing
         if (SUPABASE_URL.includes('URL_DE_TU_PROYECTO') || SUPABASE_KEY.includes('CLAVE_PUBLICA')) {
             alert('¡CONFIGURACIÓN NECESARIA!\n\nPor favor, abrí el archivo index.html y reemplazá los valores de SUPABASE_URL y SUPABASE_KEY con tus claves reales de Supabase.');
         } else {
@@ -316,31 +315,39 @@
                         uploadProgress.textContent = '';
                     } catch (error) {
                         console.error("Error al guardar:", error);
-                        alert('Hubo un error al guardar el producto.');
+                        alert(`Hubo un error al guardar el producto:\n\n${error.message}`);
                         uploadProgress.textContent = '';
                     }
                 });
 
                 // --- MOSTRAR PRODUCTOS Y OFERTAS ---
                 async function fetchAndRenderProducts() {
-                    const { data: products, error } = await supabaseClient.from('products').select('*');
-                    if (error) {
+                    try {
+                        const { data: products, error } = await supabaseClient.from('products').select('*');
+                        if (error) throw error;
+
+                        productGrid.innerHTML = '';
+                        offersGrid.innerHTML = '';
+                        let hasProducts = false, hasOffers = false;
+
+                        products.forEach(product => {
+                            const container = product.isOffer ? offersGrid : productGrid;
+                            renderProductCard(product, container);
+                            if (product.isOffer) hasOffers = true; else hasProducts = true;
+                        });
+
+                        if (!hasProducts) productGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No hay productos en el catálogo.</p>`;
+                        if (!hasOffers) offersGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No hay ofertas destacadas.</p>`;
+                    } catch (error) {
                         console.error("Error al cargar productos:", error);
-                        return;
+                        const errorMessage = `<div class="col-span-full text-center p-8 bg-red-900/50 rounded-lg border border-red-500/50">
+                                                <h3 class="text-xl font-bold text-red-400 mb-2">Error de Conexión</h3>
+                                                <p class="text-red-300">No se pudieron cargar los productos desde la base de datos.</p>
+                                                <p class="text-xs text-gray-400 mt-4">Posible causa: Problema de CORS. Verificá la configuración de tu proyecto en Supabase.</p>
+                                            </div>`;
+                        productGrid.innerHTML = errorMessage;
+                        offersGrid.innerHTML = '';
                     }
-
-                    productGrid.innerHTML = '';
-                    offersGrid.innerHTML = '';
-                    let hasProducts = false, hasOffers = false;
-
-                    products.forEach(product => {
-                        const container = product.isOffer ? offersGrid : productGrid;
-                        renderProductCard(product, container);
-                        if (product.isOffer) hasOffers = true; else hasProducts = true;
-                    });
-
-                    if (!hasProducts) productGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No hay productos en el catálogo.</p>`;
-                    if (!hasOffers) offersGrid.innerHTML = `<p class="text-center col-span-full text-gray-500">No hay ofertas destacadas.</p>`;
                 }
 
                 // Escuchar cambios en tiempo real
@@ -407,7 +414,7 @@
                                 }
                             } catch (error) {
                                 console.error("Error al eliminar:", error);
-                                alert('No se pudo eliminar el producto.');
+                                alert(`Hubo un error al eliminar el producto:\n\n${error.message}`);
                             }
                         }
                     });
@@ -436,4 +443,3 @@
     </script>
 </body>
 </html>
-
