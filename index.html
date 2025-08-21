@@ -51,9 +51,10 @@
     <header id="header" class="bg-black/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 shadow-lg shadow-black/20">
         <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <a href="#" class="flex items-center">
-                <img src="logo.png" alt="Logo Sol de Citrino" class="h-30">
+                <img src="logo.png" alt="Logo Sol de Citrino" class="h-20"> <!-- Tamaño de logo ajustado -->
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#bestsellers" class="text-gray-300 hover:text-white transition duration-300">Lo Más Vendido</a>
                 <a href="#ofertas" class="text-gray-300 hover:text-white transition duration-300">Ofertas</a>
                 <a href="#productos" class="text-gray-300 hover:text-white transition duration-300">Catálogo</a>
                 <a href="#nosotros" class="text-gray-300 hover:text-white transition duration-300">Nosotros</a>
@@ -65,6 +66,7 @@
             </button>
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-black/90">
+            <a href="#bestsellers" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Lo Más Vendido</a>
             <a href="#ofertas" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Ofertas</a>
             <a href="#productos" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Catálogo</a>
             <a href="#nosotros" class="block text-center py-3 text-gray-300 hover:bg-gray-800 transition">Nosotros</a>
@@ -92,7 +94,30 @@
             </div>
         </section>
 
-        <section id="ofertas" class="py-20 md:py-28 bg-black">
+        <!-- ===== NUEVA Sección de Lo Más Vendido ===== -->
+        <section id="bestsellers" class="py-20 md:py-28 bg-black">
+            <div class="container mx-auto px-6 relative">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold uppercase">Lo Más Vendido</h2>
+                    <p class="text-gray-400 mt-2">Nuestros productos estrella, elegidos por vos.</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-amber-400 mx-auto mt-4 rounded"></div>
+                </div>
+                <div class="relative">
+                    <button id="bestsellers-prev" class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 md:-translate-x-8 bg-white/10 p-2 rounded-full text-white hover:bg-white/20 transition z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <div id="bestsellers-slider" class="slider-container overflow-x-auto scroll-smooth snap-x snap-mandatory">
+                        <div id="bestsellers-grid" class="flex flex-nowrap gap-8 px-2">
+                        </div>
+                    </div>
+                    <button id="bestsellers-next" class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 md:translate-x-8 bg-white/10 p-2 rounded-full text-white hover:bg-white/20 transition z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="ofertas" class="py-20 md:py-28 bg-[#181818]">
             <div class="container mx-auto px-6 relative">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold uppercase">Ofertas Imperdibles</h2>
@@ -114,10 +139,10 @@
             </div>
         </section>
 
-        <section id="productos" class="py-20 md:py-28 bg-[#181818]">
+        <section id="productos" class="py-20 md:py-28 bg-black">
             <div class="container mx-auto px-6 relative">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold">Nuestros Productos</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold">Nuestro Catálogo</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-amber-400 mx-auto mt-4 rounded"></div>
                 </div>
                 <div class="text-center mb-12 admin-only">
@@ -221,10 +246,16 @@
                     <input type="file" id="product-image" class="w-full text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-600 file:text-black hover:file:bg-yellow-500">
                     <img id="image-preview" src="" class="mt-4 rounded-lg max-h-40 hidden" alt="Vista previa de la imagen">
                 </div>
-                <div class="mb-6">
+                <div class="mb-4">
                     <label class="flex items-center text-gray-300">
                         <input type="checkbox" id="product-is-offer" class="w-4 h-4 text-yellow-600 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500">
                         <span class="ml-2">Marcar como Oferta Imperdible</span>
+                    </label>
+                </div>
+                <div class="mb-6">
+                    <label class="flex items-center text-gray-300">
+                        <input type="checkbox" id="product-is-bestseller" class="w-4 h-4 text-yellow-600 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500">
+                        <span class="ml-2">Marcar como Más Vendido</span>
                     </label>
                 </div>
                 <div class="flex justify-end gap-4 mt-8">
@@ -261,6 +292,7 @@
             document.addEventListener('DOMContentLoaded', () => {
                 const productGrid = document.getElementById('product-grid');
                 const offersGrid = document.getElementById('offers-grid');
+                const bestsellersGrid = document.getElementById('bestsellers-grid');
 
                 // --- LÓGICA DE AUTENTICACIÓN ---
                 const loginModal = document.getElementById('login-modal');
@@ -289,10 +321,9 @@
 
                 logoutButton.addEventListener('click', () => supabaseClient.auth.signOut());
 
-                // FIX: Forzar la recarga de productos al cambiar el estado de autenticación
                 supabaseClient.auth.onAuthStateChange((event, session) => {
                     document.body.classList.toggle('admin-view', !!session);
-                    fetchAndRenderProducts(); // Vuelve a dibujar los productos para mostrar/ocultar botones
+                    fetchAndRenderProducts();
                 });
 
                 // --- LÓGICA DE PRODUCTOS (CRUD) ---
@@ -320,7 +351,8 @@
                         name: document.getElementById('product-name').value,
                         description: document.getElementById('product-description').value,
                         price: parseFloat(document.getElementById('product-price').value),
-                        isOffer: document.getElementById('product-is-offer').checked
+                        isOffer: document.getElementById('product-is-offer').checked,
+                        isBestseller: document.getElementById('product-is-bestseller').checked
                     };
 
                     try {
@@ -364,40 +396,38 @@
                         const { data: products, error } = await supabaseClient.from('products').select('*');
                         if (error) throw error;
 
-                        const productGrid = document.getElementById('product-grid');
-                        const offersGrid = document.getElementById('offers-grid');
                         productGrid.innerHTML = '';
                         offersGrid.innerHTML = '';
+                        bestsellersGrid.innerHTML = '';
                         
+                        let hasProducts = false, hasOffers = false, hasBestsellers = false;
+
                         products.forEach(product => {
-                            const container = product.isOffer ? offersGrid : productGrid;
-                            renderProductCard(product, container);
+                            if (product.isBestseller) {
+                                renderProductCard(product, bestsellersGrid);
+                                hasBestsellers = true;
+                            } else if (product.isOffer) {
+                                renderProductCard(product, offersGrid);
+                                hasOffers = true;
+                            } else {
+                                renderProductCard(product, productGrid);
+                                hasProducts = true;
+                            }
                         });
+
+                        if (!hasBestsellers) bestsellersGrid.parentElement.innerHTML = `<p class="text-center text-gray-500">No hay productos destacados como más vendidos.</p>`;
+                        if (!hasOffers) offersGrid.parentElement.innerHTML = `<p class="text-center text-gray-500">No hay ofertas destacadas.</p>`;
+                        if (!hasProducts) productGrid.parentElement.innerHTML = `<p class="text-center text-gray-500">No hay productos en el catálogo.</p>`;
 
                     } catch (error) {
                         console.error("Error al cargar productos:", error);
-                        const errorMessage = `<div class="col-span-full text-center p-8 bg-red-900/50 rounded-lg border border-red-500/50">
-                                                <h3 class="text-xl font-bold text-red-400 mb-2">Error de Conexión (Failed to fetch)</h3>
-                                                <p class="text-red-300">No se pueden cargar los productos. Esto casi siempre es un problema de CORS.</p>
-                                                <p class="text-sm text-gray-300 mt-4">
-                                                    <strong>Solución:</strong><br>
-                                                    1. Andá a tu proyecto en Supabase.<br>
-                                                    2. Project Settings -> API.<br>
-                                                    3. Buscá "CORS Configuration" y agregá tu URL:<br>
-                                                    <code class="bg-gray-700 p-1 rounded text-yellow-300">https://soldecitrino2025.github.io</code>
-                                                </p>
-                                            </div>`;
-                        productGrid.parentElement.innerHTML = errorMessage;
-                        offersGrid.parentElement.innerHTML = '';
                     }
                 }
 
-                // Escuchar cambios en tiempo real
                 supabaseClient.channel('public:products')
                     .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, fetchAndRenderProducts)
                     .subscribe();
                 
-                // Carga inicial
                 fetchAndRenderProducts();
 
                 function renderProductCard(product, container) {
@@ -410,6 +440,7 @@
                         <div class="relative">
                             <img src="${product.imageUrl || 'https://placehold.co/600x400/1a1a1a/DAA520?text=Sin+Imagen'}" alt="Imagen de ${product.name}" class="w-full h-64 object-cover">
                             ${product.isOffer ? '<div class="absolute top-0 left-0 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-br-lg">OFERTA</div>' : ''}
+                            ${product.isBestseller ? '<div class="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">MÁS VENDIDO</div>' : ''}
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2 gold-gradient-text">${product.name}</h3>
@@ -419,20 +450,20 @@
                                 <a href="${whatsappLink}" target="_blank" class="gold-gradient-button text-black text-sm font-bold py-2 px-5 rounded-full hover:shadow-md transform hover:scale-105 transition">¡Lo Quiero!</a>
                             </div>
                         </div>
-                        <div class="admin-only admin-only-flex p-3 bg-gray-900/50 justify-end gap-2">
+                        <div class="admin-only-flex p-3 bg-gray-900/50 justify-end gap-2">
                             <button class="edit-btn text-blue-400 hover:text-blue-300 text-sm">Editar</button>
                             <button class="delete-btn text-red-500 hover:text-red-400 text-sm">Eliminar</button>
                         </div>
                     `;
                     container.appendChild(card);
                     
-                    // --- Lógica para botones de editar y eliminar ---
                     card.querySelector('.edit-btn')?.addEventListener('click', () => {
                         document.getElementById('product-id').value = product.id;
                         document.getElementById('product-name').value = product.name;
                         document.getElementById('product-description').value = product.description;
                         document.getElementById('product-price').value = product.price;
                         document.getElementById('product-is-offer').checked = product.isOffer || false;
+                        document.getElementById('product-is-bestseller').checked = product.isBestseller || false;
                         document.getElementById('product-modal-title').textContent = 'Editar Producto';
                         const imagePreview = document.getElementById('image-preview');
                         imagePreview.src = product.imageUrl;
@@ -445,11 +476,9 @@
                     card.querySelector('.delete-btn')?.addEventListener('click', async () => {
                         if (confirm(`¿Seguro que quieres eliminar "${product.name}"?`)) {
                             try {
-                                // Borrar de la base de datos
                                 const { error: dbError } = await supabaseClient.from('products').delete().eq('id', product.id);
                                 if (dbError) throw dbError;
 
-                                // Borrar de Storage
                                 if (product.imageName) {
                                     const { error: storageError } = await supabaseClient.storage.from('product-images').remove([product.imageName]);
                                     if (storageError) throw storageError;
@@ -461,6 +490,27 @@
                         }
                     });
                 }
+
+                // --- LÓGICA DEL CARRUSEL ---
+                function setupCarousel(sliderId, prevId, nextId) {
+                    const slider = document.getElementById(sliderId);
+                    const prevBtn = document.getElementById(prevId);
+                    const nextBtn = document.getElementById(nextId);
+
+                    if (!slider || !prevBtn || !nextBtn) return;
+
+                    const scrollAmount = () => {
+                        const firstCard = slider.querySelector(':scope > div > div');
+                        return firstCard ? firstCard.offsetWidth + 32 : 300;
+                    };
+
+                    nextBtn.addEventListener('click', () => slider.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
+                    prevBtn.addEventListener('click', () => slider.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
+                }
+
+                setupCarousel('bestsellers-slider', 'bestsellers-prev', 'bestsellers-next');
+                setupCarousel('offers-slider', 'offers-prev', 'offers-next');
+                setupCarousel('products-slider', 'products-prev', 'products-next');
 
                 // --- LÓGICA DEL FOOTER Y MENÚ MÓVIL ---
                 document.getElementById('year').textContent = new Date().getFullYear();
@@ -485,10 +535,6 @@
     </script>
 </body>
 </html>
-
-
-
-
 
 
 
